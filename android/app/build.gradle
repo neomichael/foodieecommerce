@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dbestech.food_delivery"
+    namespace = "com.dbestech.foodie"
     compileSdk = 34
     ndkVersion = "25.1.8937393"
 
@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.dbestech.food_delivery"
+        applicationId "com.dbestech.foodie"
         minSdkVersion = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
