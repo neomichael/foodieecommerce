@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dbestech.food_delivery">
+    package="com.dbestech.foodie">
    <application
-        android:label="food_delivery"
+        android:label="foodie"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
