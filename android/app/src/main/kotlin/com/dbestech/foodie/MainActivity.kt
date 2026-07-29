@@ -1,4 +1,4 @@
-package com.dbestech.food_delivery
+package com.dbestech.foodie
 
 import io.flutter.embedding.android.FlutterActivity
 
