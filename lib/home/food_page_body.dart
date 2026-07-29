@@ -63,7 +63,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       var currTrans =_height*(1-currScale)/2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1);
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, currTrans, 0);
-    }else {
+    }else { // make transform smoothly
       var currScale=0.8;
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, _height*(1-_scaleFactor)/2, 1);
     }
