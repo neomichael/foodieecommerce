@@ -14,7 +14,8 @@ class PopularFoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold( //Container will start with black screen, but we want white so Scaffold
-    body: Stack(
+      backgroundColor: Colors.white,
+      body: Stack(
       children: [
         Positioned(
             left: 0,
@@ -57,10 +58,28 @@ class PopularFoodDetail extends StatelessWidget {
                   ),
                   color: Colors.white,
                 ),
-                child: AppColumn(),
-            )),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppColumn(text:"Chinese Side"),
+                    SizedBox(height: Dimensions.height20),
+                    BigText(text:"Introduce"),
+                  ],
+                ),
+            )), //
       ],
+    ), //
+    bottomNavigationBar: Container(
+    height: 120,
+    padding: EdgeInsets.only(top:Dimensions.height30,left:Dimensions.width20,right:Dimensions.width20,),
+    decoration: BoxDecoration(
+      color: AppColors.buttonBackgroundColor,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(Dimensions.radius20*2),
+        topRight: Radius.circular(Dimensions.radius20*2),
+      ),
     ),
-    );//Scaffold
+    ),
+    ); //
   }
 }

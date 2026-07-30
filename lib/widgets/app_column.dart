@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/widgets/small_text.dart';
 import '../utils/colors.dart';
@@ -7,14 +6,15 @@ import 'big_text.dart';
 import 'icon_and_text_widgets.dart';
 
 class AppColumn extends StatelessWidget {
-  const AppColumn({Key? key}) : super(key: key);
+  final String text;
+  const AppColumn({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BigText(text: "Chinese Side"),
+        BigText(text: text, size: Dimensions.font26,),
         SizedBox(height: Dimensions.height10,),
         Row(
           children: [
