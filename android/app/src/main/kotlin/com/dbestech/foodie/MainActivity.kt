@@ -1,4 +1,4 @@
-package com.dbestech.foodie
+package com.sweethome80.foodie
 
 import io.flutter.embedding.android.FlutterActivity
 

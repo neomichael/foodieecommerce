@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dbestech.foodie">
+    package="com.sweethome80.foodie">
    <application
         android:label="foodie"
         android:icon="@mipmap/ic_launcher">
