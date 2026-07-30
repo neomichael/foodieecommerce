@@ -84,9 +84,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           )
         ),
         //List of food and images
-        Container(
-          height: 700,
-          child: ListView.builder(
+
+        ListView.builder(
               // physics: AlwaysScrollableScrollPhysics(),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -96,9 +95,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20, bottom: Dimensions.height10),
                     child:Row(
                       children: [
+                        //Image session
                         Container(
-                          width:120,
-                          height:120,
+                          width:Dimensions.ListViewImgSize,
+                          height:Dimensions.ListViewImgSize,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(Dimensions.radius20),
                             color: Colors.white38,
@@ -109,12 +109,53 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                               )
                             ),
                           )
-                        )
+                        ),
+                        //Text session
+                        Expanded(
+                          child: Container(
+                            height: Dimensions.ListViewTextContSize,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(Dimensions.radius20),
+                                bottomRight: Radius.circular(Dimensions.radius20),
+                              ),
+                              color: Colors.white,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  BigText(text: "Nutritious fruit meal in China and Taiwan"),
+                                  SizedBox(height: Dimensions.height10,),
+                                  SmallText(text: "With Chinese Characteristic"),
+                                  SizedBox(height: Dimensions.height10,),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      IconAndTextWidget(icon: Icons.circle_sharp,
+                                          text: "Normal",
+                                          iconColor: AppColors.iconColor1),
+                                      IconAndTextWidget(icon: Icons.location_on,
+                                          text: "1.7km",
+                                          iconColor: AppColors.mainColor),
+                                      IconAndTextWidget(icon: Icons.access_time_rounded,
+                                          text: "32min",
+                                          iconColor: AppColors.iconColor2),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ),
+                          ),
+                        ),
                       ],
-                    )
+                    ),
                 );
-              })
-        )
+              }
+          )
+
       ],
     ); //
   }
