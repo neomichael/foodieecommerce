@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/utils/colors.dart';
 import 'package:foodie/utils/dimensions.dart';
+import 'package:foodie/widgets/app_column.dart';
 import 'package:foodie/widgets/big_text.dart';
 import 'package:foodie/widgets/icon_and_text_widgets.dart';
 import 'package:foodie/widgets/small_text.dart';
@@ -97,8 +98,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       children: [
                         //Image session
                         Container(
-                          width:Dimensions.ListViewImgSize,
-                          height:Dimensions.ListViewImgSize,
+                          width:Dimensions.listViewImgSize,
+                          height:Dimensions.listViewImgSize,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(Dimensions.radius20),
                             color: Colors.white38,
@@ -113,7 +114,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         //Text session
                         Expanded(
                           child: Container(
-                            height: Dimensions.ListViewTextContSize,
+                            height: Dimensions.listViewTextContSize,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(Dimensions.radius20),
@@ -225,43 +226,8 @@ return Transform(
                 ),
                 child: Container(
                   padding: EdgeInsets.only(top: Dimensions.height15, left: Dimensions.width15, right: Dimensions.width15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BigText(text: "Chinese Side"),
-                      SizedBox(height: Dimensions.height10,),
-                      Row(
-                        children: [
-                          Wrap(
-                            children: List.generate(5, (index)=> Icon(Icons.star, color: AppColors.mainColor, size: 15)),
-                          ),
-                          SizedBox(width: 10),
-                          SmallText(text: "4.5"),
-                          SizedBox(width: 10),
-                          SmallText(text: "1287"),
-                          SizedBox(width: 10),
-                          SmallText(text: "comments"),
-                        ],
-                      ),
-                      SizedBox(height: Dimensions.height20,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconAndTextWidget(icon: Icons.circle_sharp,
-                              text: "Normal",
-                              iconColor: AppColors.iconColor1),
-                          IconAndTextWidget(icon: Icons.location_on,
-                              text: "1.7km",
-                              iconColor: AppColors.mainColor),
-                          IconAndTextWidget(icon: Icons.access_time_rounded,
-                              text: "32min",
-                              iconColor: AppColors.iconColor2),
-                        ],
-                      )
-                    ],
-                  ),
+                  child: AppColumn(),
                 ), //
-
               ),
             ),//
           ]
