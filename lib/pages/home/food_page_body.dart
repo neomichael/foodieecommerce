@@ -136,13 +136,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       IconAndTextWidget(icon: Icons.circle_sharp,
-                                          text: "Normal",
+                                          text: "一般",
                                           iconColor: AppColors.iconColor1),
                                       IconAndTextWidget(icon: Icons.location_on,
-                                          text: "1.7km",
+                                          text: "1.7公里",
                                           iconColor: AppColors.mainColor),
                                       IconAndTextWidget(icon: Icons.access_time_rounded,
-                                          text: "32min",
+                                          text: "32分鐘",
                                           iconColor: AppColors.iconColor2),
                                     ],
                                   )
