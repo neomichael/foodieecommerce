@@ -90,7 +90,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               // physics: AlwaysScrollableScrollPhysics(),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 10,
+              itemCount: 5,
               itemBuilder: (context, index){
                 return Container(
                     margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20, bottom: Dimensions.height10),
@@ -135,15 +135,21 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      IconAndTextWidget(icon: Icons.circle_sharp,
-                                          text: "一般",
-                                          iconColor: AppColors.iconColor1),
-                                      IconAndTextWidget(icon: Icons.location_on,
-                                          text: "1.7公里",
-                                          iconColor: AppColors.mainColor),
-                                      IconAndTextWidget(icon: Icons.access_time_rounded,
-                                          text: "32分鐘",
-                                          iconColor: AppColors.iconColor2),
+                                      Expanded(
+                                        child: IconAndTextWidget(icon: Icons.circle_sharp,
+                                            text: "Normal",
+                                            iconColor: AppColors.iconColor1),
+                                      ),
+                                      Expanded(
+                                        child: IconAndTextWidget(icon: Icons.location_on,
+                                            text: "1.7km",
+                                            iconColor: AppColors.mainColor),
+                                      ),
+                                      Expanded(
+                                        child: IconAndTextWidget(icon: Icons.access_time_rounded,
+                                            text: "32mins",
+                                            iconColor: AppColors.iconColor2),
+                                      ),
                                     ],
                                   )
                                 ],

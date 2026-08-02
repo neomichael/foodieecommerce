@@ -1,0 +1,4 @@
+- `[x]` Create cleaned SQL file (removing broken geometry data)
+- `[x]` Import cleaned SQL into MySQL
+- `[x]` Create backend installation history report
+- `[x]` Verify database population

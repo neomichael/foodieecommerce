@@ -19,7 +19,7 @@ class AppColumn extends StatelessWidget {
         Row(
           children: [
             Wrap(
-              children: List.generate(5, (index)=> Icon(Icons.star, color: AppColors.mainColor, size: 15)),
+              children: List.generate(5, (index)=> Icon(Icons.star, color: AppColors.mainColor, size: 12)),//15
             ),
             SizedBox(width: 10),
             SmallText(text: "4.5"),
@@ -29,19 +29,25 @@ class AppColumn extends StatelessWidget {
             SmallText(text: "comments"),
           ],
         ),
-        SizedBox(height: Dimensions.height20,),
+        SizedBox(height: Dimensions.height10,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconAndTextWidget(icon: Icons.circle_sharp,
-                text: "Normal",
-                iconColor: AppColors.iconColor1),
-            IconAndTextWidget(icon: Icons.location_on,
-                text: "1.7",
-                iconColor: AppColors.mainColor),
-            IconAndTextWidget(icon: Icons.access_time_rounded,
-                text: "32min",
-                iconColor: AppColors.iconColor2),
+            Expanded(
+              child: IconAndTextWidget(icon: Icons.circle_sharp,
+                  text: "Normal",
+                  iconColor: AppColors.iconColor1),
+            ),
+            Expanded(
+              child: IconAndTextWidget(icon: Icons.location_on,
+                  text: "1.7km",
+                  iconColor: AppColors.mainColor),
+            ),
+            Expanded(
+              child: IconAndTextWidget(icon: Icons.access_time_rounded,
+                  text: "32min",
+                  iconColor: AppColors.iconColor2),
+            ),
           ],
         )
       ],

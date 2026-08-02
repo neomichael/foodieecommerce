@@ -39,3 +39,6 @@
 # OS-related
 .DS_Store
 thumbs.db
+*.zip
+*.unused
+cleanup_and_fix_git.sh
