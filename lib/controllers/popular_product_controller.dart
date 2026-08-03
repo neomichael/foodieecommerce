@@ -8,6 +8,9 @@ class PopularProductController extends GetxController{
   List<dynamic> _popularProductList=[];//private variable in dart
   List<dynamic> get popularProductList => _popularProductList;
 
+  bool isLoaded = false;
+  //bool get isLoaded=>_isLoaded;
+
   Future<void> getPopularProductList()async {
     Response response = await popularProductRepo.getPopularProductList();
     print("Full Response: " + response.toString());
@@ -16,6 +19,7 @@ class PopularProductController extends GetxController{
       print("got products");
       _popularProductList=[];
       _popularProductList.addAll(Product.fromJson(response.body).products);
+      isLoaded=true;
       update();
     }else{
       print("Could not get products: ${response.statusText}");

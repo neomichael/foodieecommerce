@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/controllers/popular_product_controller.dart';
+import 'package:foodie/controllers/recommended_product_controller.dart';
 import 'package:foodie/models/products_model.dart';
 import 'package:foodie/utils/app_constants.dart';
 import 'package:foodie/utils/colors.dart';
@@ -46,7 +47,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       children: [
         //upper side horizontal slider section
         GetBuilder<PopularProductController>(builder:(popularProducts){
-          return Container(
+          return popularProducts.isLoaded?Container(
             //color: Colors.redAccent,
             height: Dimensions.pageView,
             child: PageView.builder(
@@ -55,8 +56,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 itemBuilder: (context, position){
                   return _buildPageItem(position, popularProducts.popularProductList[position]);
                 }), //
-          );
-        }),
+          ):CircularProgressIndicator();
+          color: AppColors.mainColor;
+        }), //
         //dots section
         GetBuilder<PopularProductController>(builder: (popularProducts){
           return DotsIndicator(
@@ -69,7 +71,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
             ),
           );
-        }),
+        }), //
         //Popular text
         SizedBox(height: Dimensions.height30),
         Container(
@@ -77,7 +79,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end, // make food pairing down
             children: [
-              BigText(text: "Popular"),
+              BigText(text: "Recommended"),
               SizedBox(width: Dimensions.width10),
               Container(
                 margin: const EdgeInsets.only(bottom: 3),
@@ -91,54 +93,54 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
             ]
           )
-        ),
+        ), //
         //List of food and images
-
-        ListView.builder(
-              // physics: AlwaysScrollableScrollPhysics(),
+        GetBuilder<RecommendedProductController>(builder:(recommendedProduct){
+          return recommendedProduct.isLoaded?ListView.builder(
+            // physics: AlwaysScrollableScrollPhysics(),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 5,
+              itemCount: recommendedProduct.recommendedProductList.length,
               itemBuilder: (context, index){
                 return Container(
-                    margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20, bottom: Dimensions.height10),
-                    child:Row(
-                      children: [
-                        //Image session
-                        Container(
+                  margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20, bottom: Dimensions.height10),
+                  child:Row(
+                    children: [
+                      //Image session
+                      Container(
                           width:Dimensions.listViewImgSize,
                           height:Dimensions.listViewImgSize,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(Dimensions.radius20),
                             color: Colors.white38,
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                "assets/image/food0.png"
-                              )
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    AppConstants.BASE_URL+AppConstants.UPLOAD_URL+recommendedProduct.recommendedProductList[index].img!
+                                )
                             ),
                           )
-                        ),
-                        //Text session
-                        Expanded(
-                          child: Container(
-                            height: Dimensions.listViewTextContSize,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(Dimensions.radius20),
-                                bottomRight: Radius.circular(Dimensions.radius20),
-                              ),
-                              color: Colors.white,
+                      ),
+                      //Text session
+                      Expanded(
+                        child: Container(
+                          height: Dimensions.listViewTextContSize,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimensions.radius20),
+                              bottomRight: Radius.circular(Dimensions.radius20),
                             ),
-                            child: Padding(
+                            color: Colors.white,
+                          ),
+                          child: Padding(
                               padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  BigText(text: "Nutritious fruit meal in China and Taiwan"),
+                                  BigText(text: recommendedProduct.recommendedProductList[index].name!),
                                   SizedBox(height: Dimensions.height10,),
-                                  SmallText(text: "With Chinese Characteristic"),
+                                  SmallText(text: recommendedProduct.recommendedProductList[index].description!),
                                   SizedBox(height: Dimensions.height10,),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -150,7 +152,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                       ),
                                       Expanded(
                                         child: IconAndTextWidget(icon: Icons.location_on,
-                                            text: "1.7km",
+                                            text: recommendedProduct.recommendedProductList[index].location!,
                                             iconColor: AppColors.mainColor),
                                       ),
                                       Expanded(
@@ -162,15 +164,16 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                   )
                                 ],
                               )
-                            ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
                 );
               }
-          )
-
+          ):CircularProgressIndicator();
+          color: AppColors.mainColor;
+        }), //
       ],
     ); //
   }
@@ -209,7 +212,7 @@ return Transform(
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: NetworkImage(
-                        AppConstants.BASE_URL+"/uploads/"+popularProduct.img!
+                        AppConstants.BASE_URL+AppConstants.UPLOAD_URL+popularProduct.img!
                       )
                   )
               ),

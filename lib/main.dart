@@ -5,6 +5,7 @@ import 'package:foodie/pages/food/recommended_food_detail.dart';
 import 'package:foodie/pages/home/food_page_body.dart';
 import 'package:foodie/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
+import 'controllers/recommended_product_controller.dart';
 import 'helper/dependencies.dart' as dep;
 
 Future<void> main() async {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
