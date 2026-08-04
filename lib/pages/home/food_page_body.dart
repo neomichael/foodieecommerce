@@ -4,6 +4,7 @@ import 'package:foodie/controllers/popular_product_controller.dart';
 import 'package:foodie/controllers/recommended_product_controller.dart';
 import 'package:foodie/models/products_model.dart';
 import 'package:foodie/pages/food/popular_food_detail.dart';
+import 'package:foodie/routes/route_helper.dart';
 import 'package:foodie/utils/app_constants.dart';
 import 'package:foodie/utils/colors.dart';
 import 'package:foodie/utils/dimensions.dart';
@@ -53,7 +54,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             height: Dimensions.pageView,
             child: GestureDetector(
               onTap: (){
-                Get.to(()=>PopularFoodDetail());
+                // Get.to(()=>PopularFoodDetail());
+                Get.toNamed(RouteHelper.popularFood);
               },
               child: PageView.builder(
                   controller: pageController,
