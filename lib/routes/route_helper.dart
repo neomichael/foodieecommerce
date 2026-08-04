@@ -1,15 +1,30 @@
 import 'package:foodie/pages/food/popular_food_detail.dart';
 import 'package:foodie/pages/home/main_food_page.dart';
 import 'package:get/get.dart';
+import '../pages/food/recommended_food_detail.dart';
 
 // create a routing map instead of fixed link write at the main page
 // i.g.popular food slider will dynamic read and link to dedicated page
 class RouteHelper{
   static const String initial="/";
   static const String popularFood="/popular-food";
-
+  static const String recommendedFood="/recommended-food";
+  static String getInitial()=>'$initial';
+  static String getPopularFood()=>'$popularFood';
+  static String getRecommendedFood()=>'$recommendedFood';
   static List<GetPage> routes=[
-    GetPage(name: "/", page: ()=>MainFoodPage()),
-    GetPage(name: popularFood, page: ()=>PopularFoodDetail()),
+    GetPage(name: initial, page: ()=>MainFoodPage()),
+    GetPage(name: popularFood, page:(){
+      print("popular food get called");
+      return PopularFoodDetail();
+    },
+      transition: Transition.downToUp,
+    ),
+    GetPage(name: recommendedFood, page:(){
+      print("popular food get called");
+      return RecommendedFoodDetail();
+    },
+      transition: Transition.downToUp,
+    ),
   ];
 }
