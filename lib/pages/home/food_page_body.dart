@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/controllers/popular_product_controller.dart';
 import 'package:foodie/controllers/recommended_product_controller.dart';
 import 'package:foodie/models/products_model.dart';
+import 'package:foodie/pages/food/popular_food_detail.dart';
 import 'package:foodie/utils/app_constants.dart';
 import 'package:foodie/utils/colors.dart';
 import 'package:foodie/utils/dimensions.dart';
@@ -50,12 +51,17 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           return popularProducts.isLoaded?Container(
             //color: Colors.redAccent,
             height: Dimensions.pageView,
-            child: PageView.builder(
-                controller: pageController,
-                itemCount: popularProducts.popularProductList.length,
-                itemBuilder: (context, position){
-                  return _buildPageItem(position, popularProducts.popularProductList[position]);
-                }), //
+            child: GestureDetector(
+              onTap: (){
+                Get.to(()=>PopularFoodDetail());
+              },
+              child: PageView.builder(
+                  controller: pageController,
+                  itemCount: popularProducts.popularProductList.length,
+                  itemBuilder: (context, position){
+                    return _buildPageItem(position, popularProducts.popularProductList[position]);
+                  }),
+            ), //
           ):CircularProgressIndicator();
           color: AppColors.mainColor;
         }), //
