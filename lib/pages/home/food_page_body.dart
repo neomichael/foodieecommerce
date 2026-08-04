@@ -10,6 +10,7 @@ import 'package:foodie/utils/colors.dart';
 import 'package:foodie/utils/dimensions.dart';
 import 'package:foodie/widgets/app_column.dart';
 import 'package:foodie/widgets/big_text.dart';
+import 'package:foodie/widgets/expandable_text_widget.dart';
 import 'package:foodie/widgets/icon_and_text_widgets.dart';
 import 'package:foodie/widgets/small_text.dart';
 import 'package:get/get.dart';
@@ -58,8 +59,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   itemBuilder: (context, position){
                     return _buildPageItem(position, popularProducts.popularProductList[position]);
                   }),
-          ):CircularProgressIndicator();
-          color: AppColors.mainColor;
+          ):const CircularProgressIndicator(
+            color: AppColors.mainColor,
+          );
         }), //
         //dots section
         GetBuilder<PopularProductController>(builder: (popularProducts){
@@ -106,7 +108,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               itemBuilder: (context, index){
                 return GestureDetector(
                   onTap: (){
-                    Get.toNamed(RouteHelper.getRecommendedFood());
+                    Get.toNamed(RouteHelper.getRecommendedFood(index));
                   },
                   child: Container(
                     margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20, bottom: Dimensions.height10),
@@ -130,7 +132,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         //Text session
                         Expanded(
                           child: Container(
-                            height: Dimensions.listViewTextContSize,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(Dimensions.radius20),
@@ -139,14 +140,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                               color: Colors.white,
                             ),
                             child: Padding(
-                                padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+                                padding: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10, bottom: Dimensions.height10),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     BigText(text: recommendedProduct.recommendedProductList[index].name!),
                                     SizedBox(height: Dimensions.height10,),
-                                    SmallText(text: recommendedProduct.recommendedProductList[index].description!),
+                                    ExpandableTextWidget(text: recommendedProduct.recommendedProductList[index].description!),
                                     SizedBox(height: Dimensions.height10,),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -178,8 +179,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   ),
                 );
               }
-          ):CircularProgressIndicator();
-          color: AppColors.mainColor;
+          ):const CircularProgressIndicator(
+            color: AppColors.mainColor,
+          );
         }), //
       ],
     ); //

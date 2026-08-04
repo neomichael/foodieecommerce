@@ -22,11 +22,35 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   @override
   void initState(){
     super.initState();
-    if(widget.text.length>textHeight){
-      firstHalf = widget.text.substring(0, textHeight.toInt());
-      secondHalf = widget.text.substring(textHeight.toInt()+1, widget.text.length);
+    _prepareText();
+  }
+
+  @override
+  void didUpdateWidget(covariant ExpandableTextWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if(widget.text != oldWidget.text){
+      _prepareText();
+    }
+  }
+
+  void _prepareText() {
+    // 1. Convert block tags to newlines
+    // 2. Remove all other HTML
+    // 3. Decode common entities
+    String cleanedText = widget.text
+        .replaceAll(RegExp(r'<(p|br|div|h[1-6])[^>]*>'), '\n') 
+        .replaceAll(RegExp(r'<[^>]*>'), '')
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&#39;', "'")
+        .replaceAll('&quot;', '"')
+        .replaceAll('&amp;', '&')
+        .trim();
+
+    if(cleanedText.length > textHeight.toInt()){
+      firstHalf = cleanedText.substring(0, textHeight.toInt());
+      secondHalf = cleanedText.substring(textHeight.toInt(), cleanedText.length);
     }else{
-      firstHalf=widget.text;
+      firstHalf=cleanedText;
       secondHalf="";
     }
   }
@@ -34,9 +58,15 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:secondHalf.isEmpty? SmallText(color: AppColors.paraColor, size: Dimensions.font16, text: firstHalf):Column(
+      child: secondHalf.isEmpty? SmallText(color: AppColors.paraColor, size: Dimensions.font16, text: firstHalf):Column(
         children: [
-          SmallText(height:1.8,color: AppColors.paraColor, size: Dimensions.font16, text: hiddenText?(firstHalf+"..."):(firstHalf+secondHalf)),
+          // Use the flexible SmallText (no more maxLines:1 limit)
+          SmallText(
+              height: 1.8, 
+              color: AppColors.paraColor, 
+              size: Dimensions.font16, 
+              text: hiddenText ? (firstHalf + "...") : (firstHalf + secondHalf),
+          ),
           InkWell(
             onTap: (){
               setState(() {
