@@ -52,18 +52,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           return popularProducts.isLoaded?Container(
             //color: Colors.redAccent,
             height: Dimensions.pageView,
-            child: GestureDetector(
-              onTap: (){
-                // Get.to(()=>PopularFoodDetail());
-                Get.toNamed(RouteHelper.popularFood);
-              },
               child: PageView.builder(
                   controller: pageController,
                   itemCount: popularProducts.popularProductList.length,
                   itemBuilder: (context, position){
                     return _buildPageItem(position, popularProducts.popularProductList[position]);
                   }),
-            ), //
           ):CircularProgressIndicator();
           color: AppColors.mainColor;
         }), //
@@ -216,18 +210,25 @@ return Transform(
       transform: matrix,
       child: Stack( //use Stack in instead of container;child, because child take parents height as it is. Stack will solve this issue and image height can be adjusted.
           children: [
-            Container(
-              height: Dimensions.pageViewContainer,
-              margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius30),
-                  color: index.isEven?Color(0xFF69c5df):Color(0xFF9294cc),
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                        AppConstants.BASE_URL+AppConstants.UPLOAD_URL+popularProduct.img!
-                      )
-                  )
+            GestureDetector(
+              onTap: (){
+
+                // Get.to(()=>PopularFoodDetail());
+                Get.toNamed(RouteHelper.getPopularFood(index));
+              },
+              child: Container(
+                height: Dimensions.pageViewContainer,
+                margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius30),
+                    color: index.isEven?Color(0xFF69c5df):Color(0xFF9294cc),
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                          AppConstants.BASE_URL+AppConstants.UPLOAD_URL+popularProduct.img!
+                        )
+                    )
+                ),
               ),
             ), //
             Align(

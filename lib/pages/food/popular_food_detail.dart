@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/controllers/popular_product_controller.dart';
+import 'package:foodie/utils/app_constants.dart';
 import 'package:foodie/utils/dimensions.dart';
 import 'package:foodie/widgets/app_column.dart';
 import 'package:foodie/widgets/app_icon.dart';
@@ -13,10 +15,14 @@ import '../home/main_food_page.dart';
 import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}): super(key: key);
+  int pageId;
+  PopularFoodDetail({Key? key, required this.pageId}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<PopularProductController>().popularProductList[pageId];
+    //print("page id is "+pageId.toString());
+    //print("product name is "+product.name.toString());
     return Scaffold( //Container will start with black screen, but we want white so Scaffold
       backgroundColor: Colors.white,
       body: Stack(
@@ -32,8 +38,8 @@ class PopularFoodDetail extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage(
-                        "assets/image/food0.png",
+                      image: NetworkImage(
+                        AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!
                       )
                   )
                 ),
@@ -73,11 +79,11 @@ class PopularFoodDetail extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppColumn(text:"Chinese Side"),
+                    AppColumn(text:product.name!),
                     SizedBox(height: Dimensions.height20),
                     BigText(text:"Introduce"),
                     SizedBox(height: Dimensions.height20),
-                    Expanded(child: SingleChildScrollView(child: ExpandableTextWidget(text: "Disarming Hamas is a critical step in implementing Trump’s multi-phase peace plan to end the war in Gaza and moving to set up a technocratic government for the strip. Mediators have been trying to negotiate with Hamas for months on impt up a technocratic government for the strip. Mediators have been trying to negotiate with Hamas for months on implementing the plan, but there is skepticism in the region that Hamas will hold up its end of the barge barge barge barge barge barge barge barge barge barge barge barge barge barge barge barge barge barEmergency crews on the ground and in helicopters are scouring the Karakoram mountain range for the 10 climbers, including one American, who are believed to be have been on 8,047-meter-tall Broad Peak when an avalanche struck around midday Thursday.ge barge barge bargain."))),
+                    Expanded(child: SingleChildScrollView(child: ExpandableTextWidget(text: product.description!)))
                   ],
                 ),
             )), //
