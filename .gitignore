@@ -42,3 +42,13 @@ thumbs.db
 *.zip
 *.unused
 cleanup_and_fix_git.sh
+
+# Local Gradle downloaded/cache files
+wrapper/
+caches/
+daemon/
+native/
+
+# Android Studio backup folders
+.idea_backup*/
+.idea.backup*/
