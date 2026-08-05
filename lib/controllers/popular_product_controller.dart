@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/controllers/cart_controller.dart';
 import 'package:foodie/data/repository/popular_product_repo.dart';
 import 'package:get/get.dart';
 import 'package:foodie/models/products_model.dart';
 import 'package:foodie/utils/colors.dart';
 
-class PopularProductController extends GetxController{
+class PopularProductController extends GetxController {
   final PopularProductRepo popularProductRepo;
   PopularProductController({required this.popularProductRepo});
-  List<dynamic> _popularProductList=[];//private variable in dart
+  List<dynamic> _popularProductList = []; //private variable in dart
   List<dynamic> get popularProductList => _popularProductList;
+  late CartController _cart;
 
   bool isLoaded = false;
-  //bool get isLoaded=>_isLoaded;
   int _quantity = 0;
   int get quantity => _quantity;
+  int _inCartItems = 0;
+  int get inCartItems => _inCartItems + _quantity;
 
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
@@ -35,18 +38,22 @@ class PopularProductController extends GetxController{
   }
 
   int checkQuantity(int quantity) {
-    if (quantity < 0) {
+    if ((_inCartItems + quantity) < 0) {
       Get.snackbar(
         "Item count",
         "You can't reduce more!",
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
+      if(_inCartItems>0){
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
       return 0;
-    } else if (quantity > 20) {
+    } else if ((_inCartItems + quantity) > 20) {
       Get.snackbar(
         "Item count",
-        "You can't add more!",
+        "You can't add more! Are you sure you can have that.",
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
@@ -54,5 +61,26 @@ class PopularProductController extends GetxController{
     } else {
       return quantity;
     }
+  }
+
+  void initProduct(ProductModel product, CartController cart) {
+    _quantity = 0;
+    _inCartItems = 0;
+    _cart = cart;
+    var exist = false;
+    exist = _cart.existInCart(product);
+    if (exist) {
+      _inCartItems = _cart.getQuantity(product);
+    }
+  }
+
+  void addItem(ProductModel product) {
+    _cart.addItem(product, _quantity);
+    _quantity = 0;
+    _inCartItems = _cart.getQuantity(product);
+    _cart.items.forEach((key, value) {
+      print("The id is " + value.id.toString() + " The quantity is " + value.quantity.toString());
+    });
+    update();
   }
 }

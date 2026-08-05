@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/controllers/cart_controller.dart';
 import 'package:foodie/controllers/popular_product_controller.dart';
 import 'package:foodie/utils/app_constants.dart';
 import 'package:foodie/utils/dimensions.dart';
@@ -17,8 +18,8 @@ class PopularFoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var product = Get.find<PopularProductController>().popularProductList[pageId];
-    //print("page id is "+pageId.toString());
-    //print("product name is "+product.name.toString());
+    Get.find<PopularProductController>().initProduct(product, Get.find<CartController>());
+
     return Scaffold( //Container will start with black screen, but we want white so Scaffold
       backgroundColor: Colors.white,
       body: Stack(
@@ -124,9 +125,9 @@ class PopularFoodDetail extends StatelessWidget {
                     child: const Icon(Icons.remove, color: AppColors.signColor),
                   ),
                   SizedBox(width: Dimensions.width10 / 2),
-                  BigText(text: popularProduct.quantity.toString()),
+                  BigText(text: popularProduct.inCartItems.toString()),
                   SizedBox(width: Dimensions.width10 / 2),
-                  GestureDetector(
+                  GestureDetector (
                     onTap: () {
                       popularProduct.setQuantity(true);
                     },
@@ -135,20 +136,25 @@ class PopularFoodDetail extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(
-                top: Dimensions.height20,
-                bottom: Dimensions.height20,
-                left: Dimensions.width20,
-                right: Dimensions.width20,
-              ),
-              child: BigText(
-                text: "\$ ${product.price!} | Add to cart",
-                color: Colors.white,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius20),
-                color: AppColors.mainColor,
+            GestureDetector(
+              onTap: () {
+                popularProduct.addItem(product);
+              },
+              child: Container(
+                padding: EdgeInsets.only(
+                  top: Dimensions.height20,
+                  bottom: Dimensions.height20,
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                ),
+                child: BigText(
+                  text: "\$ ${product.price!} | Add to cart",
+                  color: Colors.white,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: AppColors.mainColor,
+                ),
               ),
             ),
           ],
