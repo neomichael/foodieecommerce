@@ -33,7 +33,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     pageController.addListener(() {
       setState(() {
         _currPageValue= pageController.page!;//save the current page has changed.
-        print("Current value is "+_currPageValue.toString());
+        //print("Current value is "+_currPageValue.toString());
       });
     });
   }
