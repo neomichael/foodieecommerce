@@ -19,18 +19,18 @@ class AppColumn extends StatelessWidget {
         Row(
           children: [
             Wrap(
-              children: List.generate(5, (index)=> Icon(Icons.star, color: AppColors.mainColor, size: 12)),//15
+              children: List.generate(5, (index)=> const Icon(Icons.star, color: AppColors.mainColor, size: 12)),//15
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             SmallText(text: "4.5"),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             SmallText(text: "1287"),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             SmallText(text: "comments"),
           ],
         ),
         SizedBox(height: Dimensions.height10,),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(

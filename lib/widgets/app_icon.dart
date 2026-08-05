@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:foodie/utils/dimensions.dart';
 
 class AppIcon extends StatelessWidget {
   final IconData icon;
@@ -7,7 +6,7 @@ class AppIcon extends StatelessWidget {
   final Color iconColor;
   final double size;
   final double iconSize;
-  AppIcon({Key? key,
+  const AppIcon({Key? key,
   required this.icon,
     this.backgroundColor=const Color(0xFFfcf4e4),
     this.iconColor=const Color(0xFF756d54),

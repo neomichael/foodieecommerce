@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:foodie/controllers/popular_product_controller.dart';
 import 'package:foodie/controllers/recommended_product_controller.dart';
 import 'package:foodie/models/products_model.dart';
-import 'package:foodie/pages/food/popular_food_detail.dart';
 import 'package:foodie/routes/route_helper.dart';
 import 'package:foodie/utils/app_constants.dart';
 import 'package:foodie/utils/colors.dart';
 import 'package:foodie/utils/dimensions.dart';
 import 'package:foodie/widgets/app_column.dart';
 import 'package:foodie/widgets/big_text.dart';
-import 'package:foodie/widgets/expandable_text_widget.dart';
+import '../../widgets/expandable_text_widget.dart';
 import 'package:foodie/widgets/icon_and_text_widgets.dart';
 import 'package:foodie/widgets/small_text.dart';
 import 'package:get/get.dart';
@@ -25,8 +24,8 @@ class FoodPageBody extends StatefulWidget {
 class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageValue=0.0;
-  double _scaleFactor=0.8;
-  double _height=Dimensions.pageViewContainer;
+  final double _scaleFactor=0.8;
+  final double _height=Dimensions.pageViewContainer;
 
   @override
   void initState(){
@@ -50,7 +49,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       children: [
         //upper side horizontal slider section
         GetBuilder<PopularProductController>(builder:(popularProducts){
-          return popularProducts.isLoaded?Container(
+          return popularProducts.isLoaded?SizedBox(
             //color: Colors.redAccent,
             height: Dimensions.pageView,
               child: PageView.builder(
@@ -98,11 +97,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ]
           )
         ), //
-        //List of food and images
+        // Recommended food
+        // List of food and images
         GetBuilder<RecommendedProductController>(builder:(recommendedProduct){
           return recommendedProduct.isLoaded?ListView.builder(
             // physics: AlwaysScrollableScrollPhysics(),
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: recommendedProduct.recommendedProductList.length,
               itemBuilder: (context, index){
@@ -152,7 +152,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Expanded(
+                                        const Expanded(
                                           child: IconAndTextWidget(icon: Icons.circle_sharp,
                                               text: "Normal",
                                               iconColor: AppColors.iconColor1),
@@ -162,7 +162,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                               text: recommendedProduct.recommendedProductList[index].location!,
                                               iconColor: AppColors.mainColor),
                                         ),
-                                        Expanded(
+                                        const Expanded(
                                           child: IconAndTextWidget(icon: Icons.access_time_rounded,
                                               text: "32mins",
                                               iconColor: AppColors.iconColor2),
@@ -188,7 +188,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   }
 
   Widget _buildPageItem(int index, ProductModel popularProduct) {
-    Matrix4 matrix = new Matrix4.identity();
+    Matrix4 matrix = Matrix4.identity();
     if(index==_currPageValue.floor()){
       var currScale = 1-(_currPageValue-index)*(1-_scaleFactor);
       var currTrans = _height*(1-currScale)/2;
@@ -223,7 +223,7 @@ return Transform(
                 margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius30),
-                    color: index.isEven?Color(0xFF69c5df):Color(0xFF9294cc),
+                    color: index.isEven?const Color(0xFF69c5df):const Color(0xFF9294cc),
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
@@ -241,7 +241,7 @@ return Transform(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.radius20),
                   color: Colors.white,
-                  boxShadow: [//below objects are its child of boxShadow
+                  boxShadow: const [//below objects are its child of boxShadow
                     BoxShadow(
                       color: Color(0xFFe8e8e8),
                       blurRadius: 5.0,

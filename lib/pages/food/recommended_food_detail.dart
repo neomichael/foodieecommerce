@@ -30,17 +30,17 @@ class RecommendedFoodDetail extends StatelessWidget {
                   onTap: () {
                     Get.toNamed(RouteHelper.getInitial());
                   },
-                  child: AppIcon(icon: Icons.clear),
+                  child: const AppIcon(icon: Icons.clear),
                 ),
-                AppIcon(icon: Icons.shopping_cart_outlined),
+                const AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(20),
+              preferredSize: const Size.fromHeight(20),
               child: Container(
                 child: Center(child: BigText(size: Dimensions.font26, text: product.name!)),
                 width: double.maxFinite,
-                padding: EdgeInsets.only(top: 5, bottom: 10),
+                padding: const EdgeInsets.only(top: 5, bottom: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -93,7 +93,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   icon: Icons.remove,
                 ),
                 BigText(
-                  text: "\$${product.price!} X 0",
+                  text: "\$ ${product.price!} X 0",
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font26,
                 ),
@@ -135,7 +135,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
                     color: Colors.white,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.favorite,
                     color: AppColors.mainColor,
                   ),

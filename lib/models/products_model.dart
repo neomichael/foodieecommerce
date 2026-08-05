@@ -8,10 +8,10 @@ class Product {
   List<ProductModel> get products=>_products;
 
   Product({required totalSize, required typeId, required offSet, required products}){
-    this._totalSize=totalSize;
-    this._typeId=typeId;
-    this._offSet=offSet;
-    this._products=products;
+    _totalSize=totalSize;
+    _typeId=typeId;
+    _offSet=offSet;
+    _products=products;
   }
 
   Product.fromJson(Map<String, dynamic> json) {
@@ -21,7 +21,7 @@ class Product {
     if (json['products'] != null) {
       _products = <ProductModel>[];
       json['products'].forEach((v) {
-        _products!.add(ProductModel.fromJson(v));
+        _products.add(ProductModel.fromJson(v));
       });
     }
   }

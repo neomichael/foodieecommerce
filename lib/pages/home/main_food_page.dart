@@ -32,7 +32,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                         Row(
                           children: [
                             SmallText(text: "臺北市", color: Colors.black54),
-                            Icon(Icons.arrow_drop_down_circle_rounded)
+                            const Icon(Icons.arrow_drop_down_circle_rounded)
                           ],
                         )
                       ],
@@ -53,7 +53,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
             )
           ), //
           //showing the body
-          Expanded(child: SingleChildScrollView(
+          const Expanded(child: SingleChildScrollView(
             child: FoodPageBody(),
           )),
         ],

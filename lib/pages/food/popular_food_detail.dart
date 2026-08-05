@@ -5,12 +5,8 @@ import 'package:foodie/utils/dimensions.dart';
 import 'package:foodie/widgets/app_column.dart';
 import 'package:foodie/widgets/app_icon.dart';
 import 'package:foodie/widgets/expandable_text_widget.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../utils/colors.dart';
 import '../../widgets/big_text.dart';
-import '../../widgets/icon_and_text_widgets.dart';
-import '../../widgets/small_text.dart';
-import '../../widgets/expandable_text_widget.dart';
 import '../home/main_food_page.dart';
 import 'package:get/get.dart';
 
@@ -54,11 +50,11 @@ class PopularFoodDetail extends StatelessWidget {
             children: [
               GestureDetector(
                   onTap:(){
-                    Get.to(()=>MainFoodPage());
+                    Get.to(()=>const MainFoodPage());
                   },
                   child:
-                    AppIcon(icon: Icons.arrow_back_ios)),
-                    AppIcon(icon: Icons. shopping_cart_outlined),
+                    const AppIcon(icon: Icons.arrow_back_ios)),
+                    const AppIcon(icon: Icons. shopping_cart_outlined),
             ],
         )), //
         // introduce of food
@@ -110,17 +106,21 @@ class PopularFoodDetail extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(Icons.remove, color: AppColors.signColor,),
+              const Icon(Icons.remove, color: AppColors.signColor,),
               SizedBox(width: Dimensions.width10/2,),
               BigText(text: "0"),
               SizedBox(width: Dimensions.width10/2,),
-              Icon(Icons.add, color: AppColors.signColor,)
+              GestureDetector(
+                onTap: (){
+
+                }
+                child: Icon(Icons.add, color: AppColors.signColor,))
             ],
           ) //
         ), //
         Container(
           padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, left: Dimensions.width20, right: Dimensions.width20),
-          child: BigText(text: "\$${product.price!} | Add to cart", color:Colors.white,),
+          child: BigText(text: "\$ ${product.price!} | Add to cart", color:Colors.white,),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.radius20),
             color: AppColors.mainColor,
