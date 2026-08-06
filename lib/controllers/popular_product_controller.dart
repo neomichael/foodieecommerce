@@ -81,6 +81,20 @@ class PopularProductController extends GetxController {
     _cart.items.forEach((key, value) {
       print("The id is " + value.id.toString() + " The quantity is " + value.quantity.toString());
     });
+    // check item ordering count before Add to cart
+    if (_quantity>0){
+      _cart.addItem(product,_quantity);
+      //modify 2026-08-06, change policy to UI order number present user really want to add at
+      //that moment not the former count. more add press means the total count increase finally.
+      _quantity=0;
+      _cart.items.forEach((key, value) {
+        print("The meal id is "+value.id.toString()+" The quantity is "+value.toString());
+      });
+    }else{
+      Get.snackbar("Item count", "plus at least one before add cart",
+      backgroundColor: AppColors.mainColor,
+      colorText: Colors.white);
+    }
     update();
   }
 }
