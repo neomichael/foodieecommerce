@@ -3,13 +3,16 @@ import 'package:foodie/controllers/cart_controller.dart';
 import 'package:foodie/data/repository/popular_product_repo.dart';
 import 'package:get/get.dart';
 import 'package:foodie/models/products_model.dart';
+import 'package:foodie/models/cart_model.dart';
 import 'package:foodie/utils/colors.dart';
 
 class PopularProductController extends GetxController {
   final PopularProductRepo popularProductRepo;
   PopularProductController({required this.popularProductRepo});
-  List<dynamic> _popularProductList = []; //private variable in dart
+  
+  List<dynamic> _popularProductList = []; 
   List<dynamic> get popularProductList => _popularProductList;
+  
   late CartController _cart;
 
   bool isLoaded = false;
@@ -31,8 +34,10 @@ class PopularProductController extends GetxController {
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
       _quantity = checkQuantity(_quantity + 1);
+      print("Quantity incremented: " + _quantity.toString());
     } else {
       _quantity = checkQuantity(_quantity - 1);
+      print("Quantity decremented: " + _quantity.toString());
     }
     update();
   }
@@ -45,19 +50,15 @@ class PopularProductController extends GetxController {
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
-      if(_inCartItems>0){
-        _quantity = -_inCartItems;
-        return _quantity;
-      }
-      return 0;
+      return -_inCartItems;
     } else if ((_inCartItems + quantity) > 20) {
       Get.snackbar(
         "Item count",
-        "You can't add more! Are you sure you can have that.",
+        "You can't add more!",
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
-      return 20;
+      return 20 - _inCartItems;
     } else {
       return quantity;
     }
@@ -75,26 +76,31 @@ class PopularProductController extends GetxController {
   }
 
   void addItem(ProductModel product) {
-    _cart.addItem(product, _quantity);
-    _quantity = 0;
-    _inCartItems = _cart.getQuantity(product);
-    _cart.items.forEach((key, value) {
-      print("The id is " + value.id.toString() + " The quantity is " + value.quantity.toString());
-    });
-    // check item ordering count before Add to cart
-    if (_quantity>0){
-      _cart.addItem(product,_quantity);
-      //modify 2026-08-06, change policy to UI order number present user really want to add at
-      //that moment not the former count. more add press means the total count increase finally.
-      _quantity=0;
+    if (_quantity != 0) {
+      _cart.addItem(product, _quantity);
+      _quantity = 0;
+      _inCartItems = _cart.getQuantity(product);
+      print("Updated Cart for Product ID: ${product.id}. New In-Cart Total: $_inCartItems");
+      
       _cart.items.forEach((key, value) {
-        print("The meal id is "+value.id.toString()+" The quantity is "+value.toString());
+        print("Cart Summary -> Meal ID: ${value.id}, Quantity: ${value.quantity}");
       });
-    }else{
-      Get.snackbar("Item count", "plus at least one before add cart",
-      backgroundColor: AppColors.mainColor,
-      colorText: Colors.white);
+    } else {
+      Get.snackbar(
+        "Item count",
+        "You should at least add or remove one item from the cart!",
+        backgroundColor: AppColors.mainColor,
+        colorText: Colors.white,
+      );
     }
     update();
+  }
+
+  int get totalItems {
+    return _cart.totalItems;
+  }
+
+  List<CartModel> get getCartItems {
+    return _cart.getItems;
   }
 }
