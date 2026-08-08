@@ -20,13 +20,13 @@ class CartPage extends StatelessWidget {
                 AppIcon(icon: Icons.arrow_back,
                 iconColor: Colors.white,
                     backgroundColor: AppColors.mainColor,
-
+                iconSize: Dimensions.iconSize24,
                 ),
               ],
-            )
-          ))
+            ),
+          ),
         ],
       )
-    ) Placeholder();
+    );
   }
 }
