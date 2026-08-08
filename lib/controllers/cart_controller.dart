@@ -82,4 +82,6 @@ class CartController extends GetxController {
       return e.value;
     }).toList();
   }
+
+
 }
